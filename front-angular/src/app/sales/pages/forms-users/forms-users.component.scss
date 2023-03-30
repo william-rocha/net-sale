@@ -1,0 +1,15 @@
+.mat-form-field {
+  background-color: transparent !important;
+}
+
+.custom-form-user {
+  margin: auto;
+  height: 75vh;
+  overflow: auto;
+}
+
+:host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: transparent !important;
+}
+
+mat-form-field { mat-error { display: none !important; } mat-error:first-child { display: block !important; } }
