@@ -15,6 +15,7 @@ import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.com
 import { ButtonCustomComponent } from './components/button-custom/button-custom.component';
 import { InputMaskComponent } from './components/input-mask/input-mask.component';
 import { TextMaskModule } from 'angular2-text-mask';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     CepCoverageComponent,
@@ -32,7 +33,8 @@ import { TextMaskModule } from 'angular2-text-mask';
     ReactiveFormsModule,
     MatDatepickerModule,
     TextMaskModule,
-    FormsModule
+    FormsModule,
+    MatTooltipModule
   ]
 })
 export class SalesModule { }

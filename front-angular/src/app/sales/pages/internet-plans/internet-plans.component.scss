@@ -1,8 +1,10 @@
 .ellipsis-dot {
   white-space: nowrap;
-  width: 155px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    width: calc(90% + 2px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px !important;
+    color: #999999 !important;
 }
 
 .custom-subtitle {

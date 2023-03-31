@@ -1,11 +1,31 @@
-<mat-card class="custom-form-user">
-  <mat-card-header>
-    <mat-card-title>Dados Pessoais</mat-card-title>
+<mat-card class="custom-card">
+  <mat-card-header class="custom-header-main">
+    <mat-card-title style="width: 100%">
+      <h4>
+        Preencha o seu CEP que iremos verificar os planos disponíveis para sua
+        localidade.
+      </h4>
+    </mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
     <form [formGroup]="form">
       <mat-grid-list cols="12" rowHeight="100px">
+        <mat-grid-tile colspan="12" rowspan="1">
+          <div class="mat-grid-tile-content">
+            <div class="custom-label">Tipo de pessoa *</div>
+            <div style="padding-left: 10px;">O serviço selecionado está disponível apenas para:</div>
+
+            <mat-radio-group formControlName="tipo_pessoa" >
+              <mat-radio-button value="pessoa-fisica" checked >
+                <div class="ellipsis-dot">Pessoa Física</div>
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </mat-grid-tile>
+
+
+
         <mat-grid-tile colspan="4" rowspan="1">
           <mat-form-field
             appearance="fill"
@@ -52,10 +72,7 @@
             class="custom-input"
           >
             <mat-label>RG</mat-label>
-            <input
-              matInput
-              formControlName="rg"
-            />
+            <input matInput formControlName="rg" />
             <mat-error *ngIf="form.controls['rg'].errors?.['required']"
               >Campo obrigatório
             </mat-error>
@@ -322,11 +339,14 @@
           </mat-form-field>
         </mat-grid-tile>
 
-        <mat-grid-tile colspan="12" rowspan="1">
-          <button-custom [buttonType]="'warn'" [text]="'SALVAR'" (buttonClick)="submit()"></button-custom>
+        <mat-grid-tile colspan="12" rowspan="1" style="justify-content: end">
+          <button-custom
+            [buttonType]="'warn'"
+            [text]="'SALVAR'"
+            (buttonClick)="submit()"
+          ></button-custom>
         </mat-grid-tile>
       </mat-grid-list>
     </form>
   </mat-card-content>
 </mat-card>
-

@@ -65,6 +65,7 @@ export class FormsUsersComponent implements OnInit {
       nacionalidade: [''],
       profissao: ['', [Validators.minLength(3), Validators.maxLength(50)]],
       dia_vencimento: [''],
+      tipo_pessoa: ['pessoa-fisica'],
     });
   }
 

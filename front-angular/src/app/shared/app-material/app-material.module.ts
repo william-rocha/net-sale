@@ -19,6 +19,7 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   exports: [
     MatToolbarModule,
@@ -40,7 +41,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatRippleModule,
     MatStepperModule,
     MatSlideToggleModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatTooltipModule,
   ]
 })
 export class AppMaterialModule { }

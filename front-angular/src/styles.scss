@@ -1,9 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, Helvetica, Arial, sans-serif;
@@ -30,44 +37,45 @@ body {
 }
 
 .nav-header.mat-stepper-horizontal .mat-horizontal-stepper-header-container {
-  width: 58%;
+  width: 65%;
   background-color: #fc9208 !important;
-  margin: 45px auto !important;
+  margin: 10px auto 72px !important;
   color: white !important;
+  height: 48px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+.mat-grid-tile {
+  overflow: unset !important;
+}
+
+.mat-ripple {
+  overflow: unset !important;
+}
+
+.mat-grid-list {
+  margin: 30px 0 !important;
 }
 
 .custom-card {
   display: inline-block;
   position: relative;
   width: 100%;
-  margin: 25px 0;
+  margin: 0 !important;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14) !important;
   border-radius: 3px !important;
   color: rgba(0, 0, 0, 0.87);
   background: #fff;
   padding: 10px;
-  
   justify-content: space-between;
 }
 
-.plans-container {
-
-}
-
 .custom-header-main {
-  height: 69px;
+  min-height: 70px;
   margin-top: -20px;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
-  color: white;
-  border-radius: 3px;
-  background: linear-gradient(60deg, #ffa726, #fb8c00);
-  box-shadow: 0 12px 20px -10px rgba(255, 152, 0, 0.28),
-    0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(255, 152, 0, 0.2);
-  height: 69px;
-  margin-top: -20px;
-  box-sizing: border-box;
   color: white;
   border-radius: 3px;
   background: linear-gradient(60deg, #ffa726, #fb8c00);
@@ -75,19 +83,81 @@ body {
     0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(255, 152, 0, 0.2);
 }
 
+.mat-horizontal-content-container {
+  padding: 0%;
+  overflow: unset !important;
+}
+
+.mat-step-text-label {
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.mat-mdc-card-content:last-child {
+  padding-bottom: 0 !important;
+}
+
+.mat-mdc-card-content {
+  padding: 0px 8px !important;
+}
+
+.mat-step-icon-state-edit {
+  background-color: #ffffff !important;
+  color: #fc9208 !important;
+  font-weight: 800;
+}
+
+.mat-elevation-z4,
+.mat-mdc-elevation-specific.mat-elevation-z4 {
+  box-shadow: none !important;
+}
+
+.mat-step-header .mat-step-icon-selected,
+.mat-step-header .mat-step-icon-state-done,
+.mat-step-header .mat-step-icon-state-edit {
+  background-color: #ffffff !important;
+  color: #fc9208 !important;
+  font-weight: 800 !important;
+}
+
+.mat-step-header .mat-step-icon-selected,
+.mat-step-header .mat-step-icon-state-done,
+.mat-step-header .mat-step-icon-state-edit {
+  background-color: #f9f9f9 !important;
+  color: #fc9208 !important;
+  font-weight: 800 !important;
+}
+
+.mat-step-header .mat-step-icon {
+  background-color: #f9f9f9 !important;
+  color: #fc9208 !important;
+  font-weight: 800 !important;
+}
+
+.mat-stepper-horizontal-line {
+  border-color: #ffb14be0 !important;
+}
+
 .custom-header {
-  width: calc(44% + 20px);
-  height: 55px;
+  width: calc(32% + 20px);
+  height: 42px;
   margin-top: -20px;
   margin-left: 8px;
   margin-right: -10px;
-  padding: 10px;
-  box-sizing: border-box;
+  padding: 10px !important;
   color: white;
   border-radius: 3px;
   background: linear-gradient(60deg, #ffa726, #fb8c00);
   box-shadow: 0 12px 20px -10px rgba(255, 152, 0, 0.28),
     0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(255, 152, 0, 0.2);
+}
+
+.custom-header-sei {
+  width: 95% !important;
+  max-width: 1020px !important;
+  margin: 10px !important;
+  height: 100vh !important;
 }
 
 .custom-input {
@@ -99,6 +169,43 @@ body {
 
 .custom-input:focus {
   background-color: transparent !important;
+}
+.custom-input:hover {
+  background-color: transparent !important;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: white !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .mat-horizontal-stepper-header {
+    height: 54px !important;
+  }
+  .mat-horizontal-stepper-header-container {
+    display: block !important;
+  }
+  .nav-header.mat-stepper-horizontal .mat-horizontal-stepper-header-container {
+    width: 100%;
+    margin: 0px auto 4px !important;
+    height: auto !important;
+  }
+  .mat-horizontal-content-container {
+    padding: 54px 12px !important;
+  }
+
+  .mat-mdc-card-content {
+    padding: 0px !important;
+  }
+
+  .mat-mdc-card {
+    border: none;
+    box-shadow: none !important;
+  }
+
+  .mat-grid-list {
+    margin: 12px 0 !important;
+  }
 }
 
 @import "@angular/material/theming";

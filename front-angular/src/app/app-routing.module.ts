@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/vendas' },
+  { path: '', pathMatch: 'full', redirectTo: '/vendas/verificar-cobertura-cep' },
   {
     path: 'vendas',
     loadChildren: () => import('./sales/sales.module').then(m => m.SalesModule)

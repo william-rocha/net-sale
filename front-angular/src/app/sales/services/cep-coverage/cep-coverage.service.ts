@@ -25,8 +25,8 @@ export class CepCoverageService {
         return response
       }),
       catchError((error) => {
-
-        this.pagesValidatorService.setCep(null)
+        this.pagesValidatorService.setCep('');
+        this.pagesValidatorService.setPlan('');
 
         this.alertsService.error(AlertMsgs.cepCoverage.error);
         return of(null);

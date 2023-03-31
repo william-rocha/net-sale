@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -7,16 +7,17 @@ import { PagesValidatorService } from './sales/services/pages-validator/pages-va
 @Component({
   selector: 'app-root',
   template: `
-   <mat-grid-list cols="1" >
-    <mat-horizontal-stepper (selectionChange)="selectionChanged($event)" [linear]="true" class="nav-header">
+   <mat-grid-list cols="1" style="overflow-y: auto; height: 100vh">
+    <mat-horizontal-stepper #stepper (selectionChange)="selectionChanged($event)" [linear]="true" class="nav-header">
       <mat-step *ngFor="let step of steps; let i = index" [label]="step.title" [stepControl]="step.formGroup" [editable]="isEditable">
-          <router-outlet *ngIf="i === selectedStepIndex"></router-outlet>
+        <router-outlet *ngIf="i === selectedStepIndex"></router-outlet>
       </mat-step>
     </mat-horizontal-stepper>
 </mat-grid-list>
   `,
 })
 export class AppComponent implements OnInit {
+  @ViewChild('stepper') stepper: any;
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -28,30 +29,41 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.pagesValidatorService.cepObservable().subscribe((findCep) => {
-      if (findCep) {
-        this.selectionChanged({ selectedIndex: 1 });
-      }
+
+        this.cepCanNexPage.patchValue({
+          firstCtrl: findCep ? 'true' : ''
+        });
+        this.stepper.selectedIndex = findCep ? 1 : 0
+
     });
     this.pagesValidatorService.planObservable().subscribe((choosePlan) => {
-      if (choosePlan) {
-        this.selectionChanged({ selectedIndex: 2 });
-      }
+
+        this.planCanNextPage.patchValue({
+          secondCtrl: choosePlan ? 'true' : ''
+        });
+        this.stepper.selectedIndex = 2
+
     });
     this.pagesValidatorService.useObservable().subscribe((registeredUser) => {
-      if (registeredUser) {
-        this.selectionChanged({ selectedIndex: 3 });
-      }
+
+        this.userCanNextPage.patchValue({
+          thirdCtrl: registeredUser ? 'true' : ''
+        });
+        this.stepper.selectedIndex = 3
+
     });
   }
 
+  canGoToPlan: boolean | null = null
+
   cepCanNexPage = this.fb.group({
-    firstCtrl: [this.pagesValidatorService.getCep(), Validators.required],
+    firstCtrl: ['', Validators.required],
   });
   planCanNextPage = this.fb.group({
-    secondCtrl: [this.pagesValidatorService.getPlan(), Validators.required],
+    secondCtrl: ['', Validators.required],
   });
   userCanNextPage = this.fb.group({
-    thirdCtrl: [this.pagesValidatorService.getCep(), Validators.required],
+    thirdCtrl: ['', Validators.required],
   });
 
   public steps = [

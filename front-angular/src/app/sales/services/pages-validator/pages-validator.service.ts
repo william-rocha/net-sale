@@ -15,13 +15,13 @@ export class PagesValidatorService {
     estado: '',
   }
 
-  private cepSubject = new BehaviorSubject<Cep | null>(this.cep);
-  private planSubject = new BehaviorSubject<any>(true);
-  private useSubject = new BehaviorSubject<any>(true);
+  private cepSubject = new BehaviorSubject<any>(false);
+  private planSubject = new BehaviorSubject<any>(false);
+  private useSubject = new BehaviorSubject<any>(false);
 
   constructor() { }
 
-  setCep(value: Cep | null): void {
+  setCep(value: any): void {
     this.cepSubject.next(value);
   }
 

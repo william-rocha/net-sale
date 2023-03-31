@@ -4,8 +4,6 @@
 
 .custom-form-user {
   margin: auto;
-  height: 75vh;
-  overflow: auto;
 }
 
 :host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
@@ -13,3 +11,37 @@
 }
 
 mat-form-field { mat-error { display: none !important; } mat-error:first-child { display: block !important; } }
+
+.mat-label {
+  text-align: left;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.mat-radio-group {
+  display: block;
+  margin-top: 10px;
+}
+
+.mat-grid-tile-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.custom-label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #a6a6a6;
+  padding-left: 10px;
+}
+
+.mat-radio-button-label {
+  font-size: 14px; /* Define o tamanho da fonte do rótulo do botão */
+}
+
+.mat-radio-inner-circle {
+  width: 16px; /* Define o tamanho do ícone do botão */
+  height: 16px;
+}

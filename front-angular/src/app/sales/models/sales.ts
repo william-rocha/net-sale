@@ -1,6 +1,7 @@
 import { SweetAlertOptions } from 'sweetalert2';
 
 export interface InternetPlan {
+  netPlans: any;
   id: number;
   nome: string;
   velocidade: number;

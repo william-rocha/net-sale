@@ -1,40 +1,48 @@
-<mat-card class="custom-card" style="height: 70vh;">
+<mat-card class="custom-card">
   <mat-card-header class="custom-header-main">
-    <mat-card-title style="width: 100%;">
+    <mat-card-title style="width: 100%">
       <h4>Escolha o plano que você deseja contratar!</h4>
     </mat-card-title>
   </mat-card-header>
-  <mat-grid-list cols="3" rowspan="1" gutterSize="16px">
-    <mat-radio-group aria-label="Select an option" *ngFor="let plan of netPlans">
-    <mat-grid-tile >
-      <mat-card class="custom-card">
-        <div
-          class="example-ripple-container mat-elevation-z4"
-          matRipple
-          [matRippleCentered]="false"
-          [matRippleDisabled]="false"
-          [matRippleUnbounded]="false"
-          [matRippleRadius]="500"
-          [matRippleColor]="'#f5f5f5a1'"
-        >
-          <mat-card-header class="custom-header">
-            <mat-card-title>{{ plan.velocidade }}</mat-card-title>
-          </mat-card-header>
-          <mat-card-subtitle class="custom-subtitle"
-            ><h1>{{ plan.preco }}</h1></mat-card-subtitle
+  <mat-grid-list cols="3" rowspan="1" rowHeight="180px" gutterSize="16px">
+    <mat-radio-group
+      aria-label="Select an option"
+      *ngFor="let plan of netPlans"
+      (click)="onSelectionChange(plan)"
+    >
+      <mat-grid-tile fxFlex fxFlex.lt-md="50%" fxFlex.lt-sm="100%">
+        <mat-card class="custom-card">
+          <div
+            class="example-ripple-container mat-elevation-z4"
+            matRipple
+            [matRippleCentered]="false"
+            [matRippleDisabled]="true"
+            [matRippleUnbounded]="false"
+            [matRippleRadius]="500"
+            [matRippleColor]="'#f5f5f5a1'"
           >
-          <mat-divider></mat-divider>
-          <mat-card-content>
-              <mat-radio-button [(ngModel)]="selectedPlan" value="{{ plan }}" (change)="onSelectionChange(plan)">
+            <mat-card-header class="custom-header">
+              <mat-card-title><h4>{{ plan.velocidade }} Mbps</h4></mat-card-title>
+            </mat-card-header>
+            <mat-card-subtitle class="custom-subtitle"
+              ><h1>R$ {{ plan.preco }}</h1></mat-card-subtitle
+            >
+            <mat-divider></mat-divider>
+            <mat-card-content>
+              <mat-radio-button
+                value="{{ plan }}" [checked]="selectedPlan === plan" value="{{ plan }}"
+              >
                 <div class="ellipsis-dot">{{ plan.descricao }}</div>
               </mat-radio-button>
-          </mat-card-content>
-        </div>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-radio-group>
+            </mat-card-content>
+          </div>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-radio-group>
   </mat-grid-list>
-    <button-custom [buttonType]="'warn'" [text]="'SALVAR'" (buttonClick)="submit()"></button-custom>
+  <button-custom
+    [buttonType]="'warn'"
+    [text]="'AVANÇAR'"
+    (buttonClick)="submit()"
+  ></button-custom>
 </mat-card>
-
-
