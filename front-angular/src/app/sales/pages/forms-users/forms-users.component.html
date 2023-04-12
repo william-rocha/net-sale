@@ -1,4 +1,4 @@
-<mat-card class="custom-card">
+<mat-card class="custom-card" style="min-height: 70vh" id="users-form">
   <mat-card-header class="custom-header-main">
     <mat-card-title style="width: 100%">
       <h4>
@@ -10,343 +10,193 @@
 
   <mat-card-content>
     <form [formGroup]="form">
-      <mat-grid-list cols="12" rowHeight="100px">
-        <mat-grid-tile colspan="12" rowspan="1">
-          <div class="mat-grid-tile-content">
-            <div class="custom-label">Tipo de pessoa *</div>
-            <div style="padding-left: 10px;">O serviço selecionado está disponível apenas para:</div>
+      <div class="input-container">
+        <div class="type-form">
+          <div>Tipo de pessoa *</div>
+          <div>O serviço selecionado está disponível apenas para:</div>
+          <radio-comp
+            [label]="'Pessoa Fisica'"
+            formControlName="tipo_pessoa"
+          ></radio-comp>
+        </div>
 
-            <mat-radio-group formControlName="tipo_pessoa" >
-              <mat-radio-button value="pessoa-fisica" checked >
-                <div class="ellipsis-dot">Pessoa Física</div>
-              </mat-radio-button>
-            </mat-radio-group>
-          </div>
-        </mat-grid-tile>
+        <input-comp
+          [label]="'Nome'"
+          [formControlName]="'nome'"
+          [control]="form.controls['nome']"
+          [required]="true"
+        ></input-comp>
 
+        <input-comp
+          [label]="'CPF'"
+          [formControlName]="'cpf'"
+          [control]="form.controls['cpf']"
+          [mask]="cpfMask"
+        ></input-comp>
 
+        <input-comp
+          [label]="'RG'"
+          [formControlName]="'rg'"
+          [control]="form.controls['rg']"
+        ></input-comp>
 
-        <mat-grid-tile colspan="4" rowspan="1">
-          <mat-form-field
-            appearance="fill"
-            [hideRequiredMarker]="false"
-            floatLabel="always"
-            class="custom-input"
-          >
-            <mat-label>Nome completo</mat-label>
-            <input matInput formControlName="nome" />
-            <mat-error *ngIf="form.controls['nome'].errors?.['required']"
-              >Campo obrigatório</mat-error
-            >
-          </mat-form-field>
-        </mat-grid-tile>
+        <date-comp
+          [label]="'Data de Nascimento'"
+          [formControlName]="'data_nascimento'"
+          [control]="form.controls['data_nascimento']"
+        ></date-comp>
 
-        <mat-grid-tile colspan="4" rowspan="1">
-          <mat-form-field
-            appearance="fill"
-            [hideRequiredMarker]="false"
-            floatLabel="always"
-            class="custom-input"
-          >
-            <mat-label>CPF</mat-label>
-            <input
-              matInput
-              formControlName="cpf"
-              required
-              [textMask]="{ mask: cpfMask }"
-            />
-            <mat-error *ngIf="form.controls['cpf'].errors?.['required']"
-              >Campo obrigatório</mat-error
-            >
-            <mat-error *ngIf="form.controls['cpf'].errors?.['pattern']">
-              O CPF deve ter 11 dígitos.
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
+        <input-comp
+          [label]="'Telefone'"
+          [formControlName]="'telefone'"
+          [control]="form.controls['telefone']"
+          [required]="true"
+          [mask]="phoneMask"
+        ></input-comp>
 
-        <mat-grid-tile colspan="4" rowspan="1">
-          <mat-form-field
-            appearance="fill"
-            [hideRequiredMarker]="false"
-            floatLabel="always"
-            class="custom-input"
-          >
-            <mat-label>RG</mat-label>
-            <input matInput formControlName="rg" />
-            <mat-error *ngIf="form.controls['rg'].errors?.['required']"
-              >Campo obrigatório
-            </mat-error>
-            <mat-error *ngIf="form.controls['rg'].errors?.['pattern']">
-              O RG deve ter 12 dígitos.
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
+        <input-comp
+          [label]="'Telefone Secundário'"
+          [formControlName]="'telefone_secundario'"
+          [control]="form.controls['telefone_secundario']"
+          [required]="true"
+          [mask]="phoneMask"
+        ></input-comp>
 
-        <mat-grid-tile colspan="4" rowspan="1">
-          <mat-form-field
-            appearance="fill"
-            [hideRequiredMarker]="false"
-            floatLabel="always"
-            class="custom-input"
-          >
-            <mat-label>Data de nascimento</mat-label>
-            <input
-              matInput
-              [matDatepicker]="picker"
-              formControlName="data_nascimento"
-            />
-            <mat-datepicker-toggle
-              matIconSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </mat-grid-tile>
+        <input-comp
+          [label]="'Email'"
+          [formControlName]="'email'"
+          [control]="form.controls['email']"
+        ></input-comp>
 
-        <mat-grid-tile colspan="4" rowspan="1">
-          <mat-form-field
-            appearance="fill"
-            [hideRequiredMarker]="false"
-            floatLabel="always"
-            class="custom-input"
-          >
-            <mat-label>Telefone</mat-label>
-            <input
-              matInput
-              formControlName="telefone"
-              [textMask]="{ mask: phoneMask }"
-            />
-            <mat-error *ngIf="form.controls['telefone'].errors?.['required']"
-              >Campo obrigatório</mat-error
-            >
-          </mat-form-field>
-        </mat-grid-tile>
+        <div formGroupName="endereco_cep" class="input-container">
+          <input-comp
+            [label]="'CEP'"
+            [formControlName]="'cep'"
+            [control]="form.get('endereco_cep.cep')"
+            [isReadOnly]="true"
+            [col]="2"
+          ></input-comp>
 
-        <mat-grid-tile colspan="4" rowspan="1">
-          <mat-form-field
-            appearance="fill"
-            [hideRequiredMarker]="false"
-            floatLabel="always"
-            class="custom-input"
-          >
-            <mat-label>E-mail</mat-label>
-            <input matInput formControlName="email" />
-            <mat-error *ngIf="form.controls['email'].errors?.['email']"
-              >E-mail inválido</mat-error
-            >
-          </mat-form-field>
-        </mat-grid-tile>
+          <input-comp
+            [label]="'Estado'"
+            [formControlName]="'estado'"
+            [control]="form.get('endereco_cep.estado')"
+            [isReadOnly]="true"
+            [col]="2"
+          ></input-comp>
 
-        <mat-grid-tile colspan="4" rowspan="1">
-          <mat-form-field
-            appearance="fill"
-            [hideRequiredMarker]="false"
-            floatLabel="always"
-            class="custom-input"
-          >
-            <mat-label>Endereço</mat-label>
-            <input matInput formControlName="endereco" />
-            <mat-error *ngIf="form.controls['endereco'].errors?.['required']"
-              >Campo obrigatório</mat-error
-            >
-          </mat-form-field>
-        </mat-grid-tile>
+          <input-comp
+            [label]="'Cidade'"
+            [formControlName]="'cidade'"
+            [control]="form.get('endereco_cep.cidade')"
+            [isReadOnly]="true"
+            [col]="3"
+          ></input-comp>
 
-        <mat-grid-tile colspan="4" rowspan="1">
-          <mat-form-field
-            appearance="fill"
-            [hideRequiredMarker]="false"
-            floatLabel="always"
-            class="custom-input"
-          >
-            <mat-label>Bairro</mat-label>
-            <input matInput formControlName="bairro" />
-            <mat-error *ngIf="form.controls['bairro'].errors?.['required']"
-              >Campo obrigatório</mat-error
-            >
-          </mat-form-field>
-        </mat-grid-tile>
+          <input-comp
+            [label]="'Bairro'"
+            [formControlName]="'bairro'"
+            [control]="form.get('endereco_cep.bairro')"
+            [isReadOnly]="true"
+            [col]="2"
+          ></input-comp>
 
-        <mat-grid-tile colspan="4" rowspan="1">
-          <mat-form-field
-            appearance="fill"
-            [hideRequiredMarker]="false"
-            floatLabel="always"
-            class="custom-input"
-          >
-            <mat-label>Número</mat-label>
-            <input type="number" matInput formControlName="numero" />
-            <mat-error *ngIf="form.controls['numero'].errors?.['required']"
-              >Campo obrigatório</mat-error
-            >
-          </mat-form-field>
-        </mat-grid-tile>
+          <input-comp
+            [label]="'Rua'"
+            [formControlName]="'rua'"
+            [control]="form.get('endereco_cep.rua')"
+            [isReadOnly]="true"
+            [col]="3"
+          ></input-comp>
 
-        <mat-grid-tile colspan="4" rowspan="1">
-          <mat-form-field
-            appearance="fill"
-            [hideRequiredMarker]="false"
-            floatLabel="always"
-            class="custom-input"
-          >
-            <mat-label>Complemento</mat-label>
-            <input matInput formControlName="complemento" />
-          </mat-form-field>
-        </mat-grid-tile>
+          <input-comp
+            [label]="'Numero'"
+            [formControlName]="'numero'"
+            [control]="form.get('endereco_cep.numero')"
+            type="number"
+            [required]="true"
+            [col]="2"
+          ></input-comp>
 
-        <mat-grid-tile colspan="4" rowspan="1">
-          <mat-form-field
-            appearance="fill"
-            [hideRequiredMarker]="false"
-            floatLabel="always"
-            class="custom-input"
-          >
-            <mat-label>Referência</mat-label>
-            <input matInput formControlName="referencia" />
-          </mat-form-field>
-        </mat-grid-tile>
+          <input-comp
+            [label]="'Complemento'"
+            [formControlName]="'complemento'"
+            [control]="form.get('endereco_cep.complemento')"
+            [col]="4"
+          ></input-comp>
 
-        <mat-grid-tile colspan="4" rowspan="1">
-          <mat-form-field
-            appearance="fill"
-            [hideRequiredMarker]="false"
-            floatLabel="always"
-            class="custom-input"
-          >
-            <mat-label>Nome do pai</mat-label>
-            <input matInput formControlName="nome_pai" />
-          </mat-form-field>
-        </mat-grid-tile>
+          <input-comp
+            [label]="'Referência'"
+            [formControlName]="'referencia'"
+            [control]="form.get('endereco_cep.referencia')"
+          ></input-comp>
+        </div>
 
-        <mat-grid-tile colspan="4" rowspan="1">
-          <mat-form-field
-            appearance="fill"
-            [hideRequiredMarker]="false"
-            floatLabel="always"
-            class="custom-input"
-          >
-            <mat-label>Nome da mãe</mat-label>
-            <input matInput formControlName="nome" />
-          </mat-form-field>
-        </mat-grid-tile>
+        <input-comp
+          [label]="'Nome do Pai'"
+          [formControlName]="'nome_pai'"
+          [control]="form.controls['nome_pai']"
+        ></input-comp>
 
-        <mat-grid-tile colspan="4" rowspan="1">
-          <mat-form-field
-            appearance="fill"
-            [hideRequiredMarker]="false"
-            floatLabel="always"
-            class="custom-input"
-          >
-            <mat-label>Estado Civil</mat-label>
-            <mat-select formControlName="estado_civil">
-              <mat-option value="Solteiro">Solteiro</mat-option>
-              <mat-option value="Casado">Casado</mat-option>
-              <mat-option value="Divorciado">Divorciado</mat-option>
-              <mat-option value="Viúvo">Viúvo</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </mat-grid-tile>
+        <input-comp
+          [label]="'Nome da Mãe'"
+          [formControlName]="'nome_mae'"
+          [control]="form.controls['nome_mae']"
+        ></input-comp>
 
-        <mat-grid-tile colspan="4" rowspan="1">
-          <mat-form-field
-            appearance="fill"
-            [hideRequiredMarker]="false"
-            floatLabel="always"
-            class="custom-input"
-          >
-            <mat-label>Gênero</mat-label>
-            <mat-select formControlName="genero">
-              <mat-option value="masculino">Masculino</mat-option>
-              <mat-option value="feminino">Feminino</mat-option>
-              <mat-option value="nao-binario">Não binário</mat-option>
-              <mat-option value="outro">Outro</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </mat-grid-tile>
+        <select-comp
+          [label]="'Estado Cívil'"
+          [formControlName]="'estado_civil'"
+          [control]="form.controls['estado_civil']"
+          [options]="estadoCivilOptions"
+        ></select-comp>
 
-        <mat-grid-tile colspan="4" rowspan="1">
-          <mat-form-field
-            appearance="fill"
-            [hideRequiredMarker]="false"
-            floatLabel="always"
-            class="custom-input"
-          >
-            <mat-label>Vendedor</mat-label>
-            <mat-select formControlName="vendedor">
-              <mat-option
-                *ngFor="let vendedor of vendedores"
-                [value]="vendedor.id"
-                >{{ vendedor.nome }}</mat-option
-              >
-            </mat-select>
-          </mat-form-field>
-        </mat-grid-tile>
+        <select-comp
+          [label]="'Gênero'"
+          [formControlName]="'genero'"
+          [control]="form.controls['genero']"
+          [options]="generosOptions"
+        ></select-comp>
 
-        <mat-grid-tile colspan="4" rowspan="1">
-          <mat-form-field
-            appearance="fill"
-            [hideRequiredMarker]="false"
-            floatLabel="always"
-            class="custom-input"
-          >
-            <mat-label>Observação</mat-label>
-            <input matInput formControlName="observacao" />
-          </mat-form-field>
-        </mat-grid-tile>
+        <select-comp
+          [label]="'Nacionalidade'"
+          [formControlName]="'nacionalidade'"
+          [control]="form.controls['nacionalidade']"
+          [options]="nacionalidadeOptions"
+        ></select-comp>
 
-        <mat-grid-tile colspan="4" rowspan="1">
-          <mat-form-field
-            appearance="fill"
-            [hideRequiredMarker]="false"
-            floatLabel="always"
-            class="custom-input"
-          >
-            <mat-label>Nacionalidade</mat-label>
-            <mat-select formControlName="nacionalidade">
-              <mat-option value="Brasileira">Brasileira</mat-option>
-              <mat-option value="Americana">Americana</mat-option>
-              <mat-option value="Inglesa">Inglesa</mat-option>
-              <mat-option value="Alemã">Alemã</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </mat-grid-tile>
+        <input-comp
+          [label]="'Profissão'"
+          [formControlName]="'profissao'"
+          [control]="form.controls['profissao']"
+        ></input-comp>
 
-        <mat-grid-tile colspan="4" rowspan="1">
-          <mat-form-field
-            appearance="fill"
-            [hideRequiredMarker]="false"
-            floatLabel="always"
-            class="custom-input"
-          >
-            <mat-label>Profissão</mat-label>
-            <input matInput formControlName="profissao" />
-          </mat-form-field>
-        </mat-grid-tile>
+        <select-comp
+          [label]="'Vendedor'"
+          [formControlName]="'vendedor'"
+          [control]="form.controls['vendedor']"
+          [options]="vendedoresOptions"
+        ></select-comp>
 
-        <mat-grid-tile colspan="4" rowspan="1">
-          <mat-form-field
-            appearance="fill"
-            [hideRequiredMarker]="false"
-            floatLabel="always"
-            class="custom-input"
-          >
-            <mat-label>Dia de vencimento</mat-label>
-            <mat-select formControlName="dia_vencimento">
-              <mat-option *ngFor="let dia of dias" [value]="dia.vencimento">{{
-                dia.vencimento
-              }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </mat-grid-tile>
+        <select-comp
+          [label]="'Dia de Vencimento'"
+          [formControlName]="'dia_vencimento'"
+          [control]="form.controls['dia_vencimento']"
+          [options]="diasVencimentoOptions"
+        ></select-comp>
 
-        <mat-grid-tile colspan="12" rowspan="1" style="justify-content: end">
-          <button-custom
-            [buttonType]="'warn'"
-            [text]="'SALVAR'"
-            (buttonClick)="submit()"
-          ></button-custom>
-        </mat-grid-tile>
-      </mat-grid-list>
+        <input-comp
+          [label]="'Observação'"
+          [formControlName]="'observacao'"
+          [control]="form.controls['observacao']"
+        ></input-comp>
+
+        <button-custom
+          [buttonType]="'warn'"
+          [text]="'SALVAR'"
+          (buttonClick)="submit()"
+        ></button-custom>
+      </div>
     </form>
   </mat-card-content>
 </mat-card>

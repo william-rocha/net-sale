@@ -9,26 +9,31 @@ import { PagesValidatorService } from '../pages-validator/pages-validator.servic
 import { AlertMsgs } from '../../utils/alert-msgs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserClientService {
-
-  constructor(private http: HttpClient, private pagesValidatorService: PagesValidatorService, private alertsService: AlertsService) { }
+  constructor(
+    private http: HttpClient,
+    private pagesValidatorService: PagesValidatorService,
+    private alertsService: AlertsService
+  ) {}
 
   saveUser(userBody: any) {
     const apiUrl = `http://localhost:3000/users`;
 
-    this.http.post(apiUrl, userBody).pipe(
-      tap((response) => {
-        this.pagesValidatorService.setUse(response)
-        this.alertsService.error(AlertMsgs.userClient.success);
-      }),
-      catchError((error) => {
-        this.pagesValidatorService.setUse(false)
-        this.alertsService.error(AlertMsgs.userClient.error);
-        return of(null);
-      })
-    ).subscribe();
+    this.http
+      .post(apiUrl, userBody)
+      .pipe(
+        tap((response) => {
+          // this.pagesValidatorService.setUse(response)
+          this.alertsService.error(AlertMsgs.userClient.success);
+        }),
+        catchError((error) => {
+          // this.pagesValidatorService.setUse(false)
+          this.alertsService.error(AlertMsgs.userClient.error);
+          return of(null);
+        })
+      )
+      .subscribe();
   }
-
 }

@@ -10,21 +10,27 @@ import { CepCoverageComponent } from './pages/cep-coverage/cep-coverage.componen
 import { InternetPlansComponent } from './pages/internet-plans/internet-plans.component';
 import { FormsUsersComponent } from './pages/forms-users/forms-users.component';
 import { AppMaterialModule } from '../shared/app-material/app-material.module';
-import { InputComponent } from './components/input/input.component';
-import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.component';
+
 import { ButtonCustomComponent } from './components/button-custom/button-custom.component';
-import { InputMaskComponent } from './components/input-mask/input-mask.component';
+
 import { TextMaskModule } from 'angular2-text-mask';
 import { MatTooltipModule } from '@angular/material/tooltip';
+
+import { InputCompComponent } from './components/input-comp/input-comp.component';
+import { DateCompComponent } from './components/date-comp/date-comp.component';
+import { SelectCompComponent } from './components/select-comp/select-comp.component';
+import { RadioCompComponent } from './components/radio-comp/radio-comp.component';
+
 @NgModule({
   declarations: [
     CepCoverageComponent,
     InternetPlansComponent,
     FormsUsersComponent,
-    InputComponent,
-    AlertDialogComponent,
     ButtonCustomComponent,
-    InputMaskComponent,
+    InputCompComponent,
+    DateCompComponent,
+    SelectCompComponent,
+    RadioCompComponent,
   ],
   imports: [
     CommonModule,
@@ -34,7 +40,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatDatepickerModule,
     TextMaskModule,
     FormsModule,
-    MatTooltipModule
-  ]
+    MatTooltipModule,
+  ],
+  exports: [InputCompComponent],
 })
-export class SalesModule { }
+export class SalesModule {}

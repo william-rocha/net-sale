@@ -3,17 +3,29 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { PagesValidatorService } from './sales/services/pages-validator/pages-validator.service';
+import { AlertsService } from './sales/services/alerts/alerts.service';
+import { AlertMsgs } from './sales/utils/alert-msgs';
 
 @Component({
   selector: 'app-root',
   template: `
-   <mat-grid-list cols="1" style="overflow-y: auto; height: 100vh">
-    <mat-horizontal-stepper #stepper (selectionChange)="selectionChanged($event)" [linear]="true" class="nav-header">
-      <mat-step *ngFor="let step of steps; let i = index" [label]="step.title" [stepControl]="step.formGroup" [editable]="isEditable">
-        <router-outlet *ngIf="i === selectedStepIndex"></router-outlet>
-      </mat-step>
-    </mat-horizontal-stepper>
-</mat-grid-list>
+    <mat-grid-list cols="1" style="overflow-y: auto; height: 100vh">
+      <mat-horizontal-stepper
+        #stepper
+        (selectionChange)="selectionChanged($event)"
+        [linear]="true"
+        class="nav-header"
+      >
+        <mat-step
+          *ngFor="let step of steps; let i = index"
+          [label]="step.title"
+          [stepControl]="step.formGroup"
+          [editable]="isEditable"
+        >
+          <router-outlet *ngIf="i === selectedStepIndex"></router-outlet>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </mat-grid-list>
   `,
 })
 export class AppComponent implements OnInit {
@@ -21,7 +33,8 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private pagesValidatorService: PagesValidatorService
+    private pagesValidatorService: PagesValidatorService,
+    private alertsService: AlertsService
   ) {}
 
   public selectedStepIndex: number = 0;
@@ -29,32 +42,26 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.pagesValidatorService.cepObservable().subscribe((findCep) => {
-
-        this.cepCanNexPage.patchValue({
-          firstCtrl: findCep ? 'true' : ''
-        });
-        this.stepper.selectedIndex = findCep ? 1 : 0
-
+      this.cepCanNexPage.patchValue({
+        firstCtrl: findCep ? 'true' : '',
+      });
+      this.stepper.selectedIndex = findCep ? 1 : 0;
     });
     this.pagesValidatorService.planObservable().subscribe((choosePlan) => {
-
-        this.planCanNextPage.patchValue({
-          secondCtrl: choosePlan ? 'true' : ''
-        });
-        this.stepper.selectedIndex = 2
-
+      this.planCanNextPage.patchValue({
+        secondCtrl: choosePlan ? 'true' : '',
+      });
+      this.stepper.selectedIndex = 2;
     });
     this.pagesValidatorService.useObservable().subscribe((registeredUser) => {
-
-        this.userCanNextPage.patchValue({
-          thirdCtrl: registeredUser ? 'true' : ''
-        });
-        this.stepper.selectedIndex = 3
-
+      this.userCanNextPage.patchValue({
+        thirdCtrl: registeredUser ? 'true' : '',
+      });
+      this.stepper.selectedIndex = 3;
     });
   }
 
-  canGoToPlan: boolean | null = null
+  canGoToPlan: boolean | null = null;
 
   cepCanNexPage = this.fb.group({
     firstCtrl: ['', Validators.required],
@@ -85,6 +92,11 @@ export class AppComponent implements OnInit {
   ];
 
   async selectionChanged({ selectedIndex }: any) {
+    if (!this.cepCanNexPage.get('firstCtrl')) {
+      this.alertsService.warning(AlertMsgs.netPlans.warning);
+      return
+    }
+
     await this.navigate(selectedIndex);
     this.selectedStepIndex = selectedIndex;
   }

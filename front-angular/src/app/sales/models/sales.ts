@@ -23,3 +23,12 @@ export interface Cep {
   id?: number;
   rua?: string;
 }
+
+export interface Plan {
+  id: number | null;
+  nome: string;
+  descricao: string;
+  velocidade: number | null;
+  preco: number | null;
+  data_expiracao: string | null;
+}

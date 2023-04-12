@@ -25,11 +25,11 @@ body {
 }
 
 .nav-header.mat-stepper-horizontal {
-  width: 75%;
+  width: 100%;
+  max-width: 970px;
   background-color: transparent;
-  margin: auto !important;
+  margin: 0px auto 136px !important;
   color: white !important;
-
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
@@ -37,7 +37,8 @@ body {
 }
 
 .nav-header.mat-stepper-horizontal .mat-horizontal-stepper-header-container {
-  width: 65%;
+  width: 100%;
+  max-width: 728px;
   background-color: #fc9208 !important;
   margin: 10px auto 72px !important;
   color: white !important;
@@ -81,6 +82,10 @@ body {
   background: linear-gradient(60deg, #ffa726, #fb8c00);
   box-shadow: 0 12px 20px -10px rgba(255, 152, 0, 0.28),
     0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(255, 152, 0, 0.2);
+}
+
+.swal2-container {
+  padding: 1.22em !important;
 }
 
 .mat-horizontal-content-container {
@@ -178,6 +183,14 @@ body {
   background-color: white !important;
 }
 
+.mat-mdc-form-field-infix {
+  width: auto !important;
+}
+
+.mdc-form-field > label {
+  width: 200px !important;
+}
+
 @media only screen and (max-width: 600px) {
   .mat-horizontal-stepper-header {
     height: 54px !important;
@@ -198,14 +211,34 @@ body {
     padding: 0px !important;
   }
 
-  .mat-mdc-card {
-    border: none;
-    box-shadow: none !important;
-  }
-
   .mat-grid-list {
     margin: 12px 0 !important;
   }
+
+  .mat-horizontal-stepper-wrapper {
+    padding: 0 5px;
+  }
+  .nav-header.mat-stepper-horizontal .mat-horizontal-stepper-header-container {
+    overflow: hidden;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #fb8e0314;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ffad5d;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #ff7b00;
 }
 
 @import "@angular/material/theming";

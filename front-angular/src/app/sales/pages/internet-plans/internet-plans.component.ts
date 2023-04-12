@@ -1,5 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 
 import { AlertsService } from '../../services/alerts/alerts.service';
 import { NetPlansService } from '../../services/net-plans/net-plans.service';
@@ -9,8 +15,8 @@ import { InternetPlan } from '../../models/sales';
 import { AlertMsgs } from '../../utils/alert-msgs';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
-import {MatTooltip, MatTooltipModule, TooltipPosition} from '@angular/material/tooltip';
-
+import { TooltipPosition } from '@angular/material/tooltip';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-internet-plans',
@@ -18,7 +24,6 @@ import {MatTooltip, MatTooltipModule, TooltipPosition} from '@angular/material/t
   styleUrls: ['./internet-plans.component.scss'],
 })
 export class InternetPlansComponent implements OnInit, OnChanges {
-
   selectedPlan: InternetPlan | undefined;
   selectedObject: InternetPlan | undefined;
 
@@ -28,36 +33,50 @@ export class InternetPlansComponent implements OnInit, OnChanges {
   @ViewChild('radioBtn', { static: false })
   radioBtn!: ElementRef;
 
-  constructor(private http: HttpClient, private netPlansService: NetPlansService, private pagesValidatorService: PagesValidatorService, private alertsService: AlertsService, private router: Router) {}
+  cols: number = 3;
 
-  netPlans: InternetPlan[] = []
+  constructor(
+    private netPlansService: NetPlansService,
+    private pagesValidatorService: PagesValidatorService,
+    private alertsService: AlertsService,
+    private router: Router,
+    private breakpointObserver: BreakpointObserver
+  ) {}
+
+  netPlans: InternetPlan[] = [];
 
   ngOnInit() {
     this.getNetPlans();
+
+    const plan = this.pagesValidatorService.getPlan()
+    if (plan) {
+      this.selectedPlan = plan
+    }
+    this.breakpointObserver
+      .observe([
+        Breakpoints.HandsetPortrait, // Define breakpoints para tamanhos de tela
+        Breakpoints.TabletPortrait,
+        Breakpoints.WebPortrait,
+      ])
+      .subscribe((result) => {
+        if (result.breakpoints[Breakpoints.HandsetPortrait]) {
+          this.cols = 1;
+        } else if (result.breakpoints[Breakpoints.TabletPortrait]) {
+          this.cols = 2;
+        } else if (result.breakpoints[Breakpoints.WebPortrait]) {
+          this.cols = 3;
+        }
+      });
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('A variável foi alterada:', changes['netPlans'].currentValue);
-    if(changes['netPlans'].currentValue) {
-      setTimeout(() => {
-        this.alertsService.success({...AlertMsgs.netPlans.success, title: `${changes['netPlans'].currentValue.length} ${AlertMsgs.netPlans.success.title}`});
-      }, 5000);
+    if (changes['netPlans'].currentValue) {
+        this.alertsService.success({
+          ...AlertMsgs.netPlans.success,
+          title: `${changes['netPlans'].currentValue.length} ${AlertMsgs.netPlans.success.title}`,
+        });
     }
   }
-
-
-  // async getNetPlans() {
-  //   if (this.netPlansService) {
-  //     this.netPlansService.getNetPlans().subscribe(
-  //       (response: InternetPlan[]) => {
-  //         this.netPlans = response;
-  //       },
-  //       (error: any) => {
-  //         console.error(error);
-  //       }
-  //     );
-  //   }
-  // }
 
   async getNetPlans() {
     if (this.netPlansService) {
@@ -67,26 +86,10 @@ export class InternetPlansComponent implements OnInit, OnChanges {
         },
         error: (error: any) => {
           console.error(error);
-        }
+        },
       });
     }
   }
-
-  // onSelectionChange(plan: InternetPlan): void {
-  //   // this.selectedPlan = plan
-  //   // if (this.radioBtn) {
-  //   //   this.radioBtn.nativeElement.checked(true);
-  //   // }
-  // }
-
-  // submit(): void {
-  //   if (this.selectedPlan) {
-  //     this.pagesValidatorService.setPlan(this.selectedObject);
-  //     // this.router.navigate(['/cadastro-usuario']);
-  //     return;
-  //   }
-  //   this.alertsService.warning(AlertMsgs.netPlans.warning);
-  // }
 
   onSelectionChange(card: InternetPlan): void {
     if (this.selectedPlan === card) {

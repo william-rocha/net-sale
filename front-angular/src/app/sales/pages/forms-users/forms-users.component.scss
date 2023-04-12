@@ -1,47 +1,122 @@
-.mat-form-field {
-  background-color: transparent !important;
-}
+#users-form {
+  .input-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 45px 0;
+    width: 100%;
+  }
+  .input-container > input-comp,
+  select-comp,
+  date-comp {
+    flex: 1 1 264px !important;
+  }
 
-.custom-form-user {
-  margin: auto;
-}
+  .col-1 {
+    flex: 1 1 8.33% !important;
+  }
 
-:host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-  background-color: transparent !important;
-}
+  .col-2 {
+    flex: 1 1 16.66% !important;
+  }
 
-mat-form-field { mat-error { display: none !important; } mat-error:first-child { display: block !important; } }
+  .col-3 {
+    flex: 1 1 33.33% !important;
+  }
 
-.mat-label {
-  text-align: left;
-  display: block;
-  margin-bottom: 10px;
-}
+  .col-4 {
+    flex: 1 1 25% !important;
+  }
 
-.mat-radio-group {
-  display: block;
-  margin-top: 10px;
-}
+  .col-12 {
+    flex: 1 1 100% !important;
+  }
 
-.mat-grid-tile-content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
+  .type-form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
 
-.custom-label {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 8px;
-  color: #a6a6a6;
-  padding-left: 10px;
-}
+    div:first-of-type {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 8px;
+      color: #a6a6a6;
+      padding-left: 10px;
+    }
 
-.mat-radio-button-label {
-  font-size: 14px; /* Define o tamanho da fonte do rótulo do botão */
-}
+    div:nth-last-of-type(1) {
+      padding-bottom: 15px;
+      padding-left: 11px;
+    }
 
-.mat-radio-inner-circle {
-  width: 16px; /* Define o tamanho do ícone do botão */
-  height: 16px;
+    radio-comp {
+      padding-bottom: 15px;
+    }
+  }
+
+  button-custom {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    padding: 10px;
+  }
+  .mat-form-field {
+    background-color: transparent !important;
+  }
+
+  .custom-form-user {
+    margin: auto;
+  }
+
+  :host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: transparent !important;
+  }
+
+  mat-form-field {
+    mat-error {
+      display: none !important;
+    }
+    mat-error:first-child {
+      display: block !important;
+    }
+  }
+
+  .mat-label {
+    text-align: left;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .mat-radio-group {
+    display: block;
+    margin-top: 10px;
+  }
+
+  .mat-grid-tile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .custom-label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #a6a6a6;
+    padding-left: 10px;
+  }
+
+  .mat-radio-button-label {
+    font-size: 14px; /* Define o tamanho da fonte do rótulo do botão */
+  }
+
+  .mat-radio-inner-circle {
+    width: 16px; /* Define o tamanho do ícone do botão */
+    height: 16px;
+  }
+
+  & .mat-grid-tile-content {
+    align-items: center !important;
+    justify-content: flex-end !important;
+  }
 }

@@ -1,0 +1,10 @@
+<!-- Mat-select com opções como entradas (inputs) -->
+<mat-form-field appearance="fill" [hideRequiredMarker]="false" floatLabel="always" class="custom-input">
+  <mat-label>{{ label }}</mat-label>
+  <mat-select [formControl]="control">
+    <!-- Usando *ngFor para iterar sobre as opções passadas como entrada -->
+    <mat-option *ngFor="let option of options" [value]="option.value">
+      {{ option.label }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

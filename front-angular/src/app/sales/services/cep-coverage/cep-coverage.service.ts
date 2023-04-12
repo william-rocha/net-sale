@@ -24,11 +24,13 @@ export class CepCoverageService {
         this.pagesValidatorService.setCep(response);
         return response
       }),
-      catchError((error) => {
+      catchError(({error}) => {
+        console.log(error);
+        this.alertsService.error({...error, confirmButtonText: 'Fechar'});
+
         this.pagesValidatorService.setCep('');
         this.pagesValidatorService.setPlan('');
 
-        this.alertsService.error(AlertMsgs.cepCoverage.error);
         return of(null);
       })
     ).subscribe();

@@ -8,7 +8,7 @@
   <mat-card>
     <mat-card-content>
       <form [formGroup]="form">
-        <mat-grid-list cols="12" rowHeight="100px">
+        <!-- <mat-grid-list cols="12" rowHeight="100px">
           <mat-grid-tile colspan="12" rowspan="1">
             <mat-form-field
               appearance="fill"
@@ -31,7 +31,15 @@
               </mat-error>
             </mat-form-field>
           </mat-grid-tile>
-        </mat-grid-list>
+        </mat-grid-list> -->
+
+        <input-comp
+        [label]="'CEP'"
+        [formControlName]="'cep'"
+        [control]="form.get('cep')"
+        [isReadOnly]="true"
+        [col]="2"
+      ></input-comp>
         <button-custom
           [buttonType]="'warn'"
           [text]="'AVANÇAR'"
